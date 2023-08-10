@@ -88,7 +88,7 @@ class std_curve():
                     ms=24)
             ax.plot(self.std_concs,
                     lm.predict(self.std_concs), 'r-', ms=24)
-            ax.set_ylabel('val Areas')
+            ax.set_ylabel('Values')
             ax.set_xlabel('Concentrations')
             ax.text(0.7,
                     0.1,
@@ -123,24 +123,9 @@ if __name__ == '__main__':
     import numpy as np
     import pandas as pd
     
-    std_concs = [0,
-                 2,
-                 10,
-                 25,
-                 50,
-                 75,
-                 100,
-                 ] # in nM
+    std_concs = [2,4,6,8,10] # in nM
     
-    std_vals = [
-                627.07, 
-                940.99, 
-                1032.87, 
-                1442.51, 
-                2384.65, 
-                3643.81, 
-                4417.69,
-                ]
+    std_vals = [1.06E+05,2.09E+05,3.07E+05,4.09E+05,5.25E+05] # corresponding peak areas
 
     # set up our curve
     curve = std_curve(std_concs, std_vals)
@@ -149,6 +134,6 @@ if __name__ == '__main__':
     coef, intercept, R2 = curve.regress(print_results=True, plot_results=True)
     
     # Given a new measurement, calculate its concentration
-    val = 1600
+    val = 1.5e5
     conc = curve.calc(val)[0]
-    print(f'concentration = {conc:.2f} nM')
+    print(f'\nconcentration = {conc:.2f} nM')
